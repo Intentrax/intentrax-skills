@@ -27,16 +27,14 @@ To enable the tenant-scoped read tool, set `INTENTRAX_MCP_API_KEY` and
 `INTENTRAX_MCP_TENANT_ID` in your environment. The public verification tool needs
 no credentials. **Never put a key in a committed file.**
 
-## Use with Cursor, Kiro, Codex, or any MCP host
+## Use with Cursor, VS Code, Windsurf, Gemini CLI, Qwen Code, Zed, Codex, or any MCP host
 
 The command is `npx -y @intentrax/mcp-server` everywhere — only the config file
-and (for Codex) the format differ. **Never commit a key**; the tenant tool reads
-`INTENTRAX_MCP_API_KEY` / `INTENTRAX_MCP_TENANT_ID` from your environment, and the
-public verify tool needs none. Full per-host details are in the
-[`@intentrax/mcp-server` README](https://www.npmjs.com/package/@intentrax/mcp-server).
+and (for a few hosts) the format differ. **Never commit a key**; the tenant tool
+reads `INTENTRAX_MCP_API_KEY` / `INTENTRAX_MCP_TENANT_ID` from your environment,
+and the public verify tool needs none.
 
-**Cursor** (`.cursor/mcp.json`) and **Kiro** (`.kiro/settings/mcp.json`) use the
-JSON `mcpServers` shape:
+Most hosts take the same `mcpServers` JSON block — only the file location differs:
 
 ```json
 {
@@ -53,14 +51,20 @@ JSON `mcpServers` shape:
 }
 ```
 
-**Codex** (`~/.codex/config.toml`) uses TOML with `env_vars` passthrough:
+| Host | Config file |
+| --- | --- |
+| Claude Desktop | mac `~/Library/Application Support/Claude/claude_desktop_config.json` · Win `%APPDATA%\Claude\claude_desktop_config.json` |
+| Cursor | `.cursor/mcp.json` |
+| Kiro | `.kiro/settings/mcp.json` |
+| Windsurf | `~/.codeium/windsurf/mcp_config.json` |
+| Gemini CLI | `~/.gemini/settings.json` |
+| Qwen Code | `~/.qwen/settings.json` |
 
-```toml
-[mcp_servers.intentrax-readonly]
-command = "npx"
-args = ["-y", "@intentrax/mcp-server"]
-env_vars = ["INTENTRAX_MCP_API_KEY", "INTENTRAX_MCP_TENANT_ID"]
-```
+A few hosts use a different key or format — **VS Code** (`servers` + `inputs` in
+`.vscode/mcp.json`), **Zed** (`context_servers`), **Codex** (TOML in
+`~/.codex/config.toml`), and **AgentScope** (registered in Python code). Full
+per-host blocks are in the
+[`@intentrax/mcp-server` README](https://www.npmjs.com/package/@intentrax/mcp-server).
 
 ## Layout
 
