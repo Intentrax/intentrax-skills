@@ -65,10 +65,11 @@ With the `@intentrax/sdk` package these are provably the same key — one raw, o
 hashed:
 
 ```ts
-import { createIdempotencyKey, admissionIdempotencyKeyHash } from "@intentrax/sdk";
+import { createIdempotencyKey, sha256Hex } from "@intentrax/sdk";
 
-const executeKey = createIdempotencyKey(request);              // raw — goes to /v1/intents/execute
-const admissionKeyHash = admissionIdempotencyKeyHash(request); // SHA-256 — goes to admission
+const executeKey = createIdempotencyKey(request);   // raw — goes to /v1/intents/execute
+const admissionKeyHash = sha256Hex(executeKey);     // SHA-256 of the same key — goes to admission
+// (SDK >= 1.0.1 also exposes admissionIdempotencyKeyHash(request) as a one-call shortcut for this.)
 ```
 
 Because they derive from the same preimage, an execution can be joined to its
