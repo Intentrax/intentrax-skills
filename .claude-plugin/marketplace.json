@@ -1,0 +1,17 @@
+{
+  "name": "intentrax",
+  "owner": {
+    "name": "Intentrax",
+    "url": "https://www.intentrax.com"
+  },
+  "plugins": [
+    {
+      "name": "intentrax-execution-assurance",
+      "source": "./plugins/intentrax",
+      "description": "Execution assurance for agent-built apps: when to add proof-of-execution and how to instrument admission -> execution -> verification. Bundles the read-only Intentrax MCP proof server.",
+      "version": "0.1.0",
+      "category": "security",
+      "tags": ["ai-agents", "proof", "verification", "execution-assurance", "mcp"]
+    }
+  ]
+}

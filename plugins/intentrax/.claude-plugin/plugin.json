@@ -1,0 +1,21 @@
+{
+  "name": "intentrax-execution-assurance",
+  "description": "Execution assurance for agent-built apps: when to add proof-of-execution and how to instrument admission -> execution -> verification. Bundles the read-only Intentrax MCP proof server.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Intentrax",
+    "url": "https://www.intentrax.com"
+  },
+  "homepage": "https://www.intentrax.com/developers",
+  "license": "Apache-2.0",
+  "mcpServers": {
+    "intentrax-readonly": {
+      "command": "npx",
+      "args": ["-y", "@intentrax/mcp-server"],
+      "env": {
+        "INTENTRAX_MCP_API_KEY": "${INTENTRAX_MCP_API_KEY}",
+        "INTENTRAX_MCP_TENANT_ID": "${INTENTRAX_MCP_TENANT_ID}"
+      }
+    }
+  }
+}
