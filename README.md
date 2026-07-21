@@ -11,7 +11,7 @@ no engine internals or signing material.
 ## Install with Claude Code
 
 ```
-/plugin marketplace add Adelodun-Adejare/intentrax-skills
+/plugin marketplace add Intentrax/intentrax-skills
 /plugin install intentrax-execution-assurance@intentrax
 ```
 
