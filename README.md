@@ -1,83 +1,76 @@
 # Intentrax skills & plugin marketplace
 
 Coding-agent knowledge and tools for building applications that use
-[Intentrax](https://www.intentrax.com) execution assurance — cryptographic,
-third-party-verifiable proof of what an autonomous agent actually did.
+[Intentrax](https://www.intentrax.com) execution assurance: signed, offline-
+verifiable proof records of what an autonomous agent was admitted to do.
 
-This repository is both a **skill source** and a **Claude Code plugin
-marketplace**. Everything here describes the public Intentrax API surface only —
-no engine internals or signing material.
+This repository is both a **skill source** (portable `SKILL.md` folders) and a
+**Claude Code plugin marketplace**. Everything here describes the public
+Intentrax API surface only — no engine internals and no signing material.
 
-## Install with Claude Code
+## Install in Claude Code
 
 ```
 /plugin marketplace add Intentrax/intentrax-skills
 /plugin install intentrax-execution-assurance@intentrax
 ```
 
-Installing the plugin gives your agent:
+The plugin gives your agent:
 
-- the **execution-assurance skill** — when proof-of-execution is worth adding and
-  how to instrument admission → execution → verification, and
-- the **read-only MCP server** `intentrax-readonly` (via
-  [`@intentrax/mcp-server`](https://www.npmjs.com/package/@intentrax/mcp-server)) —
-  two safe tools to verify a public proof and read a tenant-scoped proof.
+- three **skills** — `intentrax-execution-assurance` (when and why),
+  `intentrax-integrate-agent-actions` (find consequential agent actions and
+  wire admit → execute → verify after you approve a plan), and
+  `intentrax-verify-proof` (read-only proof checks, honestly reported);
+- the read-only **MCP server** `intentrax-readonly`, bundled as readable
+  JavaScript (identical to
+  [`@intentrax/mcp-server`](https://www.npmjs.com/package/@intentrax/mcp-server)
+  0.1.1): keyless public proof verification, plus an optional tenant-scoped
+  proof read. It never executes, admits, signs, or writes.
 
-To enable the tenant-scoped read tool, set `INTENTRAX_MCP_API_KEY` and
-`INTENTRAX_MCP_TENANT_ID` in your environment. The public verification tool needs
-no credentials. **Never put a key in a committed file.**
+The tenant read tool is optional. Claude Code asks for a read-only tenant key
+and tenant ID as plugin options and stores the key in your system credential
+store. **Never put a key in a committed file.**
 
-## Use with Cursor, VS Code, Windsurf, Gemini CLI, Qwen Code, Zed, Codex, or any MCP host
+## Use the skills in other agents
 
-The command is `npx -y @intentrax/mcp-server` everywhere — only the config file
-and (for a few hosts) the format differ. **Never commit a key**; the tenant tool
-reads `INTENTRAX_MCP_API_KEY` / `INTENTRAX_MCP_TENANT_ID` from your environment,
-and the public verify tool needs none.
+The skills follow the open [Agent Skills](https://agentskills.io/specification)
+format. Copy a folder from `plugins/intentrax/skills/` into the skills
+directory your agent reads (for example `.agents/skills/`, `.claude/skills/`,
+`.cursor/skills/`, or `.github/skills/`).
 
-Most hosts take the same `mcpServers` JSON block — only the file location differs:
+## Use the MCP server in other hosts
+
+Pin the version; never commit a key.
 
 ```json
 {
   "mcpServers": {
     "intentrax-readonly": {
       "command": "npx",
-      "args": ["-y", "@intentrax/mcp-server"],
-      "env": {
-        "INTENTRAX_MCP_API_KEY": "${INTENTRAX_MCP_API_KEY}",
-        "INTENTRAX_MCP_TENANT_ID": "${INTENTRAX_MCP_TENANT_ID}"
-      }
+      "args": ["-y", "@intentrax/mcp-server@0.1.1"]
     }
   }
 }
 ```
 
-| Host | Config file |
-| --- | --- |
-| Claude Desktop | mac `~/Library/Application Support/Claude/claude_desktop_config.json` · Win `%APPDATA%\Claude\claude_desktop_config.json` |
-| Cursor | `.cursor/mcp.json` |
-| Kiro | `.kiro/settings/mcp.json` |
-| Windsurf | `~/.codeium/windsurf/mcp_config.json` |
-| Gemini CLI | `~/.gemini/settings.json` |
-| Qwen Code | `~/.qwen/settings.json` |
-
-A few hosts use a different key or format — **VS Code** (`servers` + `inputs` in
-`.vscode/mcp.json`), **Zed** (`context_servers`), **Codex** (TOML in
-`~/.codex/config.toml`), and **AgentScope** (registered in Python code). Full
-per-host blocks are in the
+Per-host files and formats (VS Code `servers` + `inputs`, Zed
+`context_servers`, Codex TOML, and others) are in the
 [`@intentrax/mcp-server` README](https://www.npmjs.com/package/@intentrax/mcp-server).
 
 ## Layout
 
 ```
-.claude-plugin/marketplace.json          # marketplace catalog
+.claude-plugin/marketplace.json            # marketplace catalog
 plugins/intentrax/
-  .claude-plugin/plugin.json             # plugin manifest (bundles the MCP server)
-  skills/execution-assurance/SKILL.md    # the skill
+  .claude-plugin/plugin.json               # plugin manifest (userConfig + bundled MCP server)
+  README.md                                # what the plugin runs, sends, and fetches
+  server/intentrax-mcp-server.mjs          # read-only MCP server (readable bundle)
+  skills/<name>/SKILL.md                   # the skills
 ```
 
 ## Related
 
-- SDK: [`@intentrax/sdk`](https://www.npmjs.com/package/@intentrax/sdk)
+- SDK and CLI: [`@intentrax/sdk`](https://www.npmjs.com/package/@intentrax/sdk)
 - Public verifier: https://verify.intentrax.com
 - Developer docs: https://www.intentrax.com/developers
 
