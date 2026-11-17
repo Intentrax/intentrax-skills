@@ -2,3 +2,4 @@
 # and on checkout, on every platform. Prevents CRLF drift and CRLF-only
 # tooling false-positives for these portable skill/plugin/config files.
 * text=auto eol=lf
+*.png binary
