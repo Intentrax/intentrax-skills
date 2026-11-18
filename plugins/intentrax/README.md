@@ -34,7 +34,20 @@ sends nothing, and fetches nothing.
 The skills may suggest commands such as `npx @intentrax/sdk init <adapter>`,
 `npx @intentrax/sdk check-init`, or `npx @intentrax/sdk verify-proof`. Claude
 asks before running them as usual. Those commands download `@intentrax/sdk`
-from npm; scaffolding and verification run offline.
+from npm; scaffolding and offline verification send nothing else.
+
+Data the skills can lead Claude to send, all of it listed here:
+
+- **Public proof lookup.** `intentrax-verify-proof` may look up a proof ID you
+  provide at `https://verify.intentrax.com`, with no credentials. Only the
+  proof ID is sent.
+- **Package download.** The `npx` commands above fetch `@intentrax/sdk` from
+  the npm registry.
+- **Your own application's calls.** `intentrax-integrate-agent-actions` helps
+  you write code that, when *your* application runs, sends admission and
+  execution requests to `https://api.intentrax.com` with *your* API key read
+  from *your* environment. The skill never runs those calls itself and never
+  asks you to paste a key into chat.
 
 In Claude Code, the companion plugin `intentrax-mcp` (same marketplace) adds a
 read-only MCP server for verifying proofs from chat. It is optional and
