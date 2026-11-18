@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "intentrax-execution-assurance",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Decide when an AI agent's action deserves a verifiable proof, find those actions in a codebase, wire Intentrax admission -> execution -> verification, and check proofs without overstating them.",
   "author": {
     "name": "Intentrax",
