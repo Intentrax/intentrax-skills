@@ -1,8 +1,8 @@
 {
   "name": "intentrax-execution-assurance",
   "displayName": "Intentrax Execution Assurance",
-  "version": "0.2.0",
-  "description": "Execution assurance for agent-built apps: find consequential agent actions, wire admission -> execution -> verification with the Intentrax SDK, and verify proofs read-only. Bundles the read-only Intentrax MCP proof server.",
+  "version": "0.3.0",
+  "description": "Execution assurance for agent-built apps: decide when an AI agent's action deserves a verifiable proof, find those actions in a codebase, wire admission -> execution -> verification with the Intentrax SDK, and check proofs without overstating them.",
   "author": {
     "name": "Intentrax",
     "url": "https://www.intentrax.com"
@@ -10,36 +10,9 @@
   "homepage": "https://www.intentrax.com/developers/agent-toolkit",
   "repository": "https://github.com/Intentrax/intentrax-skills",
   "license": "Apache-2.0",
-  "keywords": ["ai-agents", "proof", "verification", "execution-assurance", "audit", "mcp"],
+  "keywords": ["ai-agents", "proof", "verification", "execution-assurance", "audit", "skills"],
   "documentationUrl": "https://www.intentrax.com/developers/agent-toolkit",
   "supportUrl": "https://github.com/Intentrax/intentrax-skills/issues",
   "privacyPolicyUrl": "https://www.intentrax.com/legal/privacy",
-  "termsOfServiceUrl": "https://www.intentrax.com/legal/terms",
-  "userConfig": {
-    "tenant_read_api_key": {
-      "type": "string",
-      "title": "Intentrax tenant read API key (optional)",
-      "description": "Only needed for the intentrax_read_tenant_proof tool. Use a least-privilege, read-only key. Leave empty to use keyless public verification only.",
-      "sensitive": true,
-      "required": false,
-      "default": ""
-    },
-    "tenant_id": {
-      "type": "string",
-      "title": "Intentrax tenant ID (optional)",
-      "description": "Tenant whose proofs intentrax_read_tenant_proof may read. Leave empty to use keyless public verification only.",
-      "required": false,
-      "default": ""
-    }
-  },
-  "mcpServers": {
-    "intentrax-readonly": {
-      "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/server/intentrax-mcp-server.mjs"],
-      "env": {
-        "INTENTRAX_MCP_API_KEY": "${user_config.tenant_read_api_key}",
-        "INTENTRAX_MCP_TENANT_ID": "${user_config.tenant_id}"
-      }
-    }
-  }
+  "termsOfServiceUrl": "https://www.intentrax.com/legal/terms"
 }

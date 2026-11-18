@@ -1,6 +1,6 @@
 {
   "name": "intentrax",
-  "description": "Intentrax execution assurance for AI coding agents: skills to find consequential agent actions and wire admit -> execute -> verify, plus a read-only MCP server for proof verification.",
+  "description": "Intentrax execution assurance for AI coding agents: skills to find consequential agent actions and wire admit -> execute -> verify, plus an optional read-only MCP server for proof verification.",
   "owner": {
     "name": "Intentrax",
     "url": "https://www.intentrax.com"
@@ -9,9 +9,16 @@
     {
       "name": "intentrax-execution-assurance",
       "source": "./plugins/intentrax",
-      "description": "Execution assurance for agent-built apps: find consequential agent actions, wire admission -> execution -> verification with the Intentrax SDK, and verify proofs read-only. Bundles the read-only Intentrax MCP proof server.",
+      "description": "Skills for agent-built apps: decide when an action deserves a verifiable proof, find consequential agent actions, wire admission -> execution -> verification with the Intentrax SDK, and check proofs honestly.",
       "category": "security",
-      "tags": ["ai-agents", "proof", "verification", "execution-assurance", "audit", "mcp"]
+      "tags": ["ai-agents", "proof", "verification", "execution-assurance", "audit", "skills"]
+    },
+    {
+      "name": "intentrax-mcp",
+      "source": "./plugins/intentrax-mcp",
+      "description": "Read-only Intentrax MCP server for Claude Code: verify a public proof (keyless) or read a tenant-scoped proof. Never executes, admits, signs, or writes.",
+      "category": "security",
+      "tags": ["mcp", "proof", "verification", "read-only"]
     }
   ]
 }
