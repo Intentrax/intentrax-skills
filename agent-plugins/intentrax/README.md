@@ -13,6 +13,14 @@ Cursor, Kiro, VS Code, and other hosts that load it.
   (`agent-plugins/intentrax`) as a plugin, or copy a skill folder into your
   agent's skills directory (for example `.agents/skills/`).
 
+## Try it first
+
+`npx @intentrax/sdk sandbox` (SDK 1.7.0+) runs one action through a signed
+decision, the executor's report, an independent read-only outcome check and
+offline verification, with no key, no account and no network. Add
+`--scenario contradicted` to see a "successful" action whose outcome check
+disagrees. Throwaway local keys only: never production assurance.
+
 ## What it contains
 
 Skills only. They are instructions; the plugin itself runs nothing, sends

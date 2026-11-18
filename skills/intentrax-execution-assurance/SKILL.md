@@ -30,9 +30,10 @@ Production proofs are **decision records**. A proof shows that a specific
 admission request and decision were recorded and signed by Intentrax, and
 that the record has not been altered since. Today it does **not**
 independently confirm the real-world effect (that the payment settled, the
-record changed, the deploy happened). Effect verification exists only as a
-demo (`examples/effect-assurance-demo` in the Intentrax repository) and is not
-part of production proofs.
+record changed, the deploy happened). An outcome check exists only locally —
+in the local assurance sandbox (`npx @intentrax/sdk sandbox`, ephemeral keys,
+never production assurance) and the `examples/effect-assurance-demo` in the
+Intentrax repository — and is not part of production proofs.
 
 When you describe what you built, say "the agent's action was admitted and
 recorded in a signed, verifiable proof" — never "the action was independently
@@ -104,6 +105,17 @@ admission looks skipped.
 
 Do not hand-roll HTTP. Use the SDK or the MCP server.
 
+- **See the whole flow first, no key, no account, no network (SDK 1.7.0+):**
+  `npx @intentrax/sdk sandbox` runs one sample action through a signed
+  decision, the executor's report, an independent read-only outcome check and
+  offline verification. `--scenario contradicted` shows the case logging
+  misses: the decision is ALLOW and the executor reports success, but the read
+  shows nothing changed (verdict `CONFLICTING_EVIDENCE`, exit 12).
+  `--check ./my-check.mjs` checks the outcome of the user's own action with a
+  module that exports `expected` and a default async function that only
+  **reads** the state. Everything is signed with ephemeral keys generated on
+  the machine and capped at `LOCAL_NON_TRUST_BEARING`: say "local sandbox",
+  never "verified" or "production assurance".
 - **Scaffold offline, no key needed:**
   `npx @intentrax/sdk init <adapter>` (adapters include `claude-code`,
   `cursor`, `mcp`, `langchain`, `langgraph`, `vercel-ai-sdk`, `crewai`,

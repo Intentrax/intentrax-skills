@@ -1,6 +1,6 @@
 {
   "name": "intentrax",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Intentrax execution assurance: skills to find consequential agent actions and wire admit -> execute -> verify, plus a read-only MCP server to verify proofs. Never executes, admits, signs, or writes.",
   "mcpServers": {
     "intentrax-readonly": {

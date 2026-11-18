@@ -76,6 +76,14 @@ code:
    lane answers `423`/`403`, which is expected.
 5. What the result will and will not prove (decision record; no independent
    effect confirmation today).
+6. Optionally, a free local trial before any key exists: for one action,
+   a read-only `my-check.mjs` (export `expected`, the state the action should
+   produce, and a default async function that **reads** that state) for
+   `npx @intentrax/sdk sandbox --check ./my-check.mjs`. The user runs their
+   own action first; the sandbox never calls the write path. The result is
+   labelled `SELF_REPORTED` and capped at `LOCAL_NON_TRUST_BEARING`: a trial,
+   not evidence. Running it executes the user's module, so it needs the
+   user's approval like any other run.
 
 ## Phase 3 — Implement (after approval)
 
@@ -110,7 +118,9 @@ Recipes for each step are in
   the action when admission is denied, unreachable, or misconfigured.
 - **Never sign or fabricate proof material.** Do not generate keys, sign
   payloads, construct proof JSON, or mock a `VALID` verdict outside clearly
-  labeled unit-test fixtures. The Intentrax engine is the sole signer.
+  labeled unit-test fixtures. The Intentrax engine is the sole signer of
+  production proofs. (The local sandbox signs with throwaway keys it generates
+  itself; never present its output as an Intentrax proof.)
 - **Never call execute or real side effects on the user's behalf** while
   integrating. Running the user's tests that hit live endpoints, or calling
   `/v1/intents/execute`, needs the user's explicit approval for that specific

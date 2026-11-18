@@ -1,7 +1,7 @@
 {
   "name": "intentrax-execution-assurance",
   "displayName": "Intentrax Execution Assurance",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Execution assurance for agent-built apps: decide when an AI agent's action deserves a verifiable proof, find those actions in a codebase, wire admission -> execution -> verification with the Intentrax SDK, and check proofs without overstating them.",
   "author": {
     "name": "Intentrax",
