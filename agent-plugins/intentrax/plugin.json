@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "intentrax-execution-assurance",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Decide when an AI agent's action deserves a verifiable proof, find those actions in a codebase, wire Intentrax admission -> execution -> verification, and check proofs without overstating them.",
   "author": {
     "name": "Intentrax",
@@ -40,7 +40,7 @@
         "logo": "./assets/icon.png"
       },
       "publication": {
-        "release_notes": "Three skills: intentrax-execution-assurance, intentrax-integrate-agent-actions (with a report-only gap mode), and intentrax-verify-proof."
+        "release_notes": "0.3.1: the skills now offer the published local assurance sandbox (npx @intentrax/sdk sandbox, SDK 1.7.0) as a free first step with no key, and report the hosted verifier's VERIFIED_FOR_SCOPE verdict accurately."
       }
     }
   }

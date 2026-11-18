@@ -8,6 +8,18 @@ This repository is both a **skill source** (portable `SKILL.md` folders) and a
 **Claude Code plugin marketplace**. Everything here describes the public
 Intentrax API surface only — no engine internals and no signing material.
 
+## Try it first, no key
+
+```
+npx @intentrax/sdk sandbox --scenario contradicted
+```
+
+The local assurance sandbox (SDK 1.7.0+) runs one action through a signed
+decision, the executor's report, an independent read-only outcome check, and
+offline verification, with no key, no account and no network. In this
+scenario the action is allowed and reports success, but the outcome check
+shows nothing changed. Throwaway local keys only: never production assurance.
+
 ## Install in Claude Code
 
 ```
