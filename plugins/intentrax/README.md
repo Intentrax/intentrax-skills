@@ -1,8 +1,9 @@
 # Intentrax Execution Assurance (Claude plugin)
 
-Helps a coding agent decide when an AI agent's action deserves a verifiable
-proof, find those actions in a codebase, wire Intentrax admission → execution →
-verification with the official SDK, and check proofs read-only.
+Helps Claude decide when an AI agent's action deserves a verifiable proof, find
+those actions in a codebase, wire Intentrax admission → execution →
+verification with the official SDK, and check proofs without overstating what
+they show.
 
 ## Install
 
@@ -16,40 +17,28 @@ On Claude Code versions before 2.1.275, run
 
 ## What it contains
 
-- **Skills** (instructions only; they run nothing by themselves):
-  - `intentrax-execution-assurance` — when assurance is worth adding, what a
-    proof does and does not establish, and the one idempotency-key rule.
-  - `intentrax-integrate-agent-actions` — discover consequential agent
-    actions, propose a plan for your approval, then implement fail-closed
-    wrappers.
-  - `intentrax-verify-proof` — check a proof and report the verdict without
-    overstating it.
-- **MCP server** `intentrax-readonly` — the read-only server published as
-  [`@intentrax/mcp-server`](https://www.npmjs.com/package/@intentrax/mcp-server)
-  0.1.1, bundled here as readable JavaScript in `server/` (byte-identical to
-  the npm release). It has exactly two tools and never executes, admits, signs,
-  or writes.
+Three skills. They are instructions only; the plugin itself runs nothing,
+sends nothing, and fetches nothing.
 
-## What it runs, sends, and fetches
+- `intentrax-execution-assurance` — when assurance is worth adding, what a
+  proof does and does not establish, and the one idempotency-key rule.
+- `intentrax-integrate-agent-actions` — discover consequential agent
+  actions, propose a plan for your approval, then implement fail-closed
+  wrappers. Also a report-only mode that writes an assurance gap report
+  without changing code.
+- `intentrax-verify-proof` — check a proof and report the verdict without
+  overstating it.
 
-- It runs `node server/intentrax-mcp-server.mjs` locally over stdio. Node.js 20
-  or later is required. Nothing is downloaded at install or run time.
-- `intentrax_verify_public_proof` sends the proof ID you ask about to
-  `https://verify.intentrax.com` with no credentials.
-- `intentrax_read_tenant_proof` sends the proof ID, your tenant ID, and your
-  tenant read API key to `https://api.intentrax.com`. It only runs if you set
-  both optional plugin options; otherwise it fails closed and sends nothing.
-- The server accepts no other destinations; any other origin fails closed. It
-  sends no telemetry.
-- The skills may suggest commands such as `npx @intentrax/sdk init <adapter>`
-  or `npx @intentrax/sdk verify-proof`. Your agent asks before running them as
-  usual. Those commands download `@intentrax/sdk` from npm.
+## What the skills may suggest running
 
-## Options
+The skills may suggest commands such as `npx @intentrax/sdk init <adapter>`,
+`npx @intentrax/sdk check-init`, or `npx @intentrax/sdk verify-proof`. Claude
+asks before running them as usual. Those commands download `@intentrax/sdk`
+from npm; scaffolding and verification run offline.
 
-Both options are optional. The API key is stored in your system's secure
-credential store, not in a settings file. Use a least-privilege, read-only
-key; never an execute-capable key.
+In Claude Code, the companion plugin `intentrax-mcp` (same marketplace) adds a
+read-only MCP server for verifying proofs from chat. It is optional and
+separate.
 
 ## Limits stated plainly
 
