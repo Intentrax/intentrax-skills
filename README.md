@@ -35,6 +35,27 @@ This marketplace has two plugins:
   for a read-only tenant key and tenant ID as plugin options and stores the
   key in your system credential store. **Never put a key in a committed file.**
 
+## Install in Codex (CLI, IDE, ChatGPT desktop)
+
+```
+codex plugin marketplace add Intentrax/intentrax-skills
+```
+
+Then install **Intentrax Execution Assurance** from the Intentrax marketplace
+in the Plugins Directory. The package lives in `agent-plugins/intentrax/` in
+the open [Agent Plugins](https://agent-plugins.org) format, so Cursor, Kiro, and
+other Agent Plugins hosts can load the same folder.
+
+## Install in Gemini CLI
+
+```
+gemini extensions install https://github.com/Intentrax/intentrax-skills
+```
+
+The extension (`gemini-extension.json` at the repository root) adds the same
+three skills and the read-only MCP server. Gemini asks for the optional tenant
+read key at install and keeps it in the system keychain.
+
 ## Use the skills in other agents
 
 The skills follow the open [Agent Skills](https://agentskills.io/specification)
@@ -64,16 +85,18 @@ Per-host files and formats (VS Code `servers` + `inputs`, Zed
 ## Layout
 
 ```
-.claude-plugin/marketplace.json              # marketplace catalog (two plugins)
-plugins/intentrax/                           # intentrax-execution-assurance (skills only)
-  .claude-plugin/plugin.json, icon.png
-  README.md, LICENSE
-  skills/<name>/SKILL.md
-plugins/intentrax-mcp/                       # intentrax-mcp (read-only MCP server)
-  .claude-plugin/plugin.json, icon.png       # userConfig + bundled server
-  README.md, LICENSE                         # what it runs, sends, and fetches
-  server/intentrax-mcp-server.mjs            # readable bundle
+.claude-plugin/marketplace.json        # Claude Code marketplace (two plugins)
+plugins/intentrax/                     # Claude: intentrax-execution-assurance (skills only)
+plugins/intentrax-mcp/                 # Claude: intentrax-mcp (read-only MCP server)
+.agents/plugins/marketplace.json       # Codex marketplace
+agent-plugins/intentrax/               # Agent Plugins package (Codex/ChatGPT, Cursor, Kiro)
+  plugin.json, assets/icon.png, skills/
+gemini-extension.json                  # Gemini CLI extension (repository root)
+skills/, server/                       # Gemini extension's skills and MCP server
 ```
+
+Every copy of a skill and of the server is generated from one source and
+checked byte-for-byte before release.
 
 ## Related
 

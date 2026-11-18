@@ -1,0 +1,47 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "intentrax-execution-assurance",
+  "version": "0.3.0",
+  "description": "Decide when an AI agent's action deserves a verifiable proof, find those actions in a codebase, wire Intentrax admission -> execution -> verification, and check proofs without overstating them.",
+  "author": {
+    "name": "Intentrax",
+    "email": "support@intentrax.com",
+    "url": "https://www.intentrax.com"
+  },
+  "homepage": "https://www.intentrax.com/developers/agent-toolkit",
+  "repository": "https://github.com/Intentrax/intentrax-skills",
+  "license": "Apache-2.0",
+  "keywords": ["ai-agents", "proof", "verification", "execution-assurance", "audit", "skills"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Intentrax Execution Assurance",
+        "shortDescription": "Verifiable proof for consequential agent actions",
+        "longDescription": "Helps you decide when an AI agent's action deserves a verifiable proof, find consequential agent actions in a codebase, propose an integration plan for your approval, wire fail-closed admission -> execution -> verification with the Intentrax SDK, and check proofs honestly. Skills only: the plugin itself runs nothing. Production Intentrax proofs are signed decision records; they do not independently confirm a real-world effect.",
+        "developerName": "Intentrax",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Find consequential agent actions",
+          "Plan and wire admission, execution and verification",
+          "Write a report-only assurance gap assessment",
+          "Check proofs and report verdicts honestly"
+        ],
+        "websiteURL": "https://www.intentrax.com/developers/agent-toolkit",
+        "supportURL": "https://github.com/Intentrax/intentrax-skills/issues",
+        "privacyPolicyURL": "https://www.intentrax.com/legal/privacy",
+        "termsOfServiceURL": "https://www.intentrax.com/legal/terms",
+        "defaultPrompt": [
+          "Find the consequential actions my agent takes in this repo and tell me which deserve a proof.",
+          "Write a report-only assurance gap assessment for this codebase.",
+          "Check this Intentrax proof and tell me exactly what it establishes."
+        ],
+        "brandColor": "#13A6FF",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      },
+      "publication": {
+        "release_notes": "Three skills: intentrax-execution-assurance, intentrax-integrate-agent-actions (with a report-only gap mode), and intentrax-verify-proof."
+      }
+    }
+  }
+}
