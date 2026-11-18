@@ -1,0 +1,20 @@
+{
+  "name": "intentrax",
+  "plugins": [
+    {
+      "name": "intentrax-execution-assurance",
+      "source": {
+        "source": "local",
+        "path": "./agent-plugins/intentrax"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools",
+      "interface": {
+        "displayName": "Intentrax Execution Assurance"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "intentrax",
+  "version": "0.3.0",
+  "description": "Intentrax execution assurance: skills to find consequential agent actions and wire admit -> execute -> verify, plus a read-only MCP server to verify proofs. Never executes, admits, signs, or writes.",
+  "mcpServers": {
+    "intentrax-readonly": {
+      "command": "node",
+      "args": ["${extensionPath}/server/intentrax-mcp-server.mjs"],
+      "cwd": "${extensionPath}"
+    }
+  },
+  "settings": [
+    {
+      "name": "Intentrax tenant read API key (optional)",
+      "description": "Only for the intentrax_read_tenant_proof tool. Use a least-privilege, read-only key; leave empty for keyless public verification.",
+      "envVar": "INTENTRAX_MCP_API_KEY",
+      "sensitive": true
+    },
+    {
+      "name": "Intentrax tenant ID (optional)",
+      "description": "Tenant whose proofs intentrax_read_tenant_proof may read; leave empty for keyless public verification.",
+      "envVar": "INTENTRAX_MCP_TENANT_ID"
+    }
+  ]
+}
