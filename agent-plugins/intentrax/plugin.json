@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "intentrax-execution-assurance",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Decide when an AI agent's action deserves a verifiable proof, find those actions in a codebase, wire Intentrax admission -> execution -> verification, and check proofs without overstating them.",
   "author": {
     "name": "Intentrax",
@@ -16,7 +16,7 @@
     "com.openai": {
       "interface": {
         "displayName": "Intentrax Execution Assurance",
-        "shortDescription": "Verifiable proof for consequential agent actions",
+        "shortDescription": "Verifiable agent action proofs",
         "longDescription": "Helps you decide when an AI agent's action deserves a verifiable proof, find consequential agent actions in a codebase, propose an integration plan for your approval, wire fail-closed admission -> execution -> verification with the Intentrax SDK, and check proofs honestly. Skills only: the plugin itself runs nothing. Production Intentrax proofs are signed decision records; they do not independently confirm a real-world effect.",
         "developerName": "Intentrax",
         "category": "Developer Tools",
@@ -40,7 +40,7 @@
         "logo": "./assets/icon.png"
       },
       "publication": {
-        "release_notes": "0.3.1: the skills now offer the published local assurance sandbox (npx @intentrax/sdk sandbox, SDK 1.7.0) as a free first step with no key, and report the hosted verifier's VERIFIED_FOR_SCOPE verdict accurately."
+        "release_notes": "0.3.4: listing fits the OpenAI plugin directory limits (30-character short description). Skills unchanged from 0.3.3: discovery starts with npx @intentrax/sdk scan, the local assurance sandbox is the free first step, and proof verdicts are reported without overstating them."
       }
     }
   }

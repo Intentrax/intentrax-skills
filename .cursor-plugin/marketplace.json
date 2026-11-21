@@ -1,0 +1,29 @@
+{
+  "name": "intentrax",
+  "owner": {
+    "name": "Intentrax",
+    "email": "support@intentrax.com"
+  },
+  "metadata": {
+    "description": "Intentrax execution assurance for coding agents: find consequential agent actions, wire admission, execution and verification, and check signed proofs honestly."
+  },
+  "plugins": [
+    {
+      "name": "intentrax-execution-assurance",
+      "source": "agent-plugins/intentrax",
+      "description": "Find consequential agent actions, wire Intentrax admission, execution and verification with the SDK, and check signed proofs without overstating them. Skills only.",
+      "version": "0.3.4",
+      "author": {
+        "name": "Intentrax",
+        "email": "support@intentrax.com",
+        "url": "https://www.intentrax.com"
+      },
+      "homepage": "https://www.intentrax.com/developers/agent-toolkit",
+      "repository": "https://github.com/Intentrax/intentrax-skills",
+      "license": "Apache-2.0",
+      "keywords": ["ai-agents", "proof", "verification", "execution-assurance", "audit", "skills"],
+      "logo": "https://raw.githubusercontent.com/Intentrax/intentrax-skills/main/agent-plugins/intentrax/assets/icon.png",
+      "category": "Developer Tools"
+    }
+  ]
+}

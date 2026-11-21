@@ -101,6 +101,7 @@ Per-host files and formats (VS Code `servers` + `inputs`, Zed
 plugins/intentrax/                     # Claude: intentrax-execution-assurance (skills only)
 plugins/intentrax-mcp/                 # Claude: intentrax-mcp (read-only MCP server)
 .agents/plugins/marketplace.json       # Codex marketplace
+.cursor-plugin/marketplace.json        # Cursor marketplace (points at agent-plugins/intentrax)
 agent-plugins/intentrax/               # Agent Plugins package (Codex/ChatGPT, Cursor, Kiro)
   plugin.json, assets/icon.png, skills/
 gemini-extension.json                  # Gemini CLI extension (repository root)
