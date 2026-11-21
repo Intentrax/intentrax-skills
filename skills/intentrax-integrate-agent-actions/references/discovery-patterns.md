@@ -1,7 +1,10 @@
 # Discovery patterns for consequential agent actions
 
-Use these as starting searches (ripgrep syntax). They find *candidates*; read
-each hit to confirm an agent or LLM can trigger it.
+Run `npx @intentrax/sdk scan --json` first (SDK 1.8.0+; static, local, no
+key). It applies most of these anchors and classifies what it finds. Then use
+these searches (ripgrep syntax) to check its findings and catch what a static
+scan misses. They find *candidates*; read each hit to confirm an agent or LLM
+can trigger it.
 
 ## 1. Where agents call tools
 

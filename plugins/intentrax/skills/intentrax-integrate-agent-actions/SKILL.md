@@ -20,8 +20,43 @@ not already — it defines what a proof does and does not establish.
 ## Phase 1 — Discover consequential agent actions (read-only)
 
 Find every place where an agent, LLM tool call, or automated workflow causes a
-side effect. Search, do not guess. Use the patterns in
-[references/discovery-patterns.md](references/discovery-patterns.md).
+side effect. Search, do not guess.
+
+**Start with the scan.** Run it from the repository root:
+
+```bash
+npx @intentrax/sdk scan --json
+```
+
+It needs SDK 1.8.0 or later. It is static and local: it reads files only,
+never imports or runs the project's code, makes no network call, and needs no
+key. It lists the actions an agent can reach (MCP configs and servers,
+OpenAI/Anthropic tool definitions, LangChain/LangGraph, Vercel AI SDK, shell
+tools), each with a heuristic classification and its reasons, and prints one
+line per finding:
+
+- `EXPOSED`: a consequential action reachable with a credential whose name
+  suggests broad reach, or one credential shared by read and severe tools.
+- `UNGATED`: a consequential action with no gate or approval step in front of
+  it.
+- `SELF-REPORTED`: a consequential action that reports success without
+  reading the result back.
+
+Exit code 0 means no findings, 20 means findings, 2 means a scan error. It
+names credentials only by variable or config name and file location; never
+print or copy a credential value yourself either.
+
+The scan is a starting list, not the answer. It is a heuristic over names and
+can miss actions (dynamic registration, code outside the repository,
+dispatchers in another file) or misclassify them. Then search with the
+patterns in
+[references/discovery-patterns.md](references/discovery-patterns.md), read
+the code behind every scan finding, and add what the scan missed. If the SDK
+is older than 1.8.0 or `npx` is unavailable, skip the scan and search.
+
+Each scan finding recommends least privilege **before** any Intentrax step:
+narrow or split the credential first, then gate the action. Keep that order
+in your plan.
 
 For each candidate, record:
 
@@ -44,13 +79,21 @@ If the user asks for an assessment, an audit, or "where are we exposed",
 stop after phase 1 and write a report instead of changing code. Write it to
 `INTENTRAX_ASSURANCE_GAPS.md` (or show it in chat if they prefer) with:
 
-1. **Scope searched** — directories, languages, and the search patterns used,
+1. **Scan result** — the `npx @intentrax/sdk scan` finding lines
+   (`EXPOSED` / `UNGATED` / `SELF-REPORTED`) and its fixed note, "Heuristic,
+   static scan. It can miss actions and misclassify names." Mark each finding
+   you confirmed or rejected after reading the code. Omit this section if
+   the scan was not run, and say why.
+2. **Scope searched** — directories, languages, and the search patterns used,
    and anything skipped (generated code, vendored code, other repositories).
-2. **Candidates** — the table above, each marked `UNPROTECTED`,
+3. **Candidates** — the table above, each marked `UNPROTECTED`,
    `ADMISSION_ONLY`, `ADMITTED_AND_RECORDED`, or `UNKNOWN`, based only on code
    you actually read.
-3. **Excluded actions** with one-line reasons.
-4. **Coverage statement**, verbatim: "This report lists consequential actions
+4. **Least privilege first** — for each candidate reachable with a broad or
+   shared credential, the narrower credential to use instead (the scan's
+   first recommendation), listed before any Intentrax step.
+5. **Excluded actions** with one-line reasons.
+6. **Coverage statement**, verbatim: "This report lists consequential actions
    found by static search of the scope above. It does not establish that every
    consequential action was found, that wrapped actions are wrapped on every
    code path, or that any real-world effect occurred."

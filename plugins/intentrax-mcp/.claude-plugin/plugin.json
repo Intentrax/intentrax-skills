@@ -1,7 +1,7 @@
 {
   "name": "intentrax-mcp",
   "displayName": "Intentrax read-only MCP server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The read-only Intentrax MCP server for Claude Code: verify a public proof (keyless) and, optionally, read a tenant-scoped proof. Never executes, admits, signs, or writes.",
   "author": {
     "name": "Intentrax",
