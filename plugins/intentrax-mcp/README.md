@@ -13,6 +13,23 @@ never executes, admits, signs, or writes.
 Pair it with the skills plugin `intentrax-execution-assurance` from the same
 marketplace.
 
+## No install: the hosted connector
+
+If you only need to verify proofs, you can skip this plugin. Intentrax runs a
+hosted, keyless, read-only MCP server at `https://mcp.intentrax.com/public`.
+In Claude on the web, desktop, or mobile, add it as a custom connector with
+**No sign-in**. In Claude Code, run:
+
+```
+claude mcp add --transport http intentrax https://mcp.intentrax.com/public
+```
+
+It has three tools: `intentrax_verify_public_proof`,
+`intentrax_get_trusted_key_set`, and `intentrax_verify_proof_export` (runs the
+SDK's own `verify-proof` on an export you paste, against the pinned keys). It
+needs no key, keeps nothing you send it, and never executes, admits, signs, or
+writes. Reading your own tenant's proofs still needs this local plugin.
+
 ## What it runs, sends, and fetches
 
 - It runs `node server/intentrax-mcp-server.mjs` locally over stdio. Node.js 20
